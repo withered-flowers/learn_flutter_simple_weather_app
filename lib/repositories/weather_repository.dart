@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:learn_flutter_simple_weather_app/exceptions/weather_exception.dart';
 import 'package:learn_flutter_simple_weather_app/models/custom_error.dart';
 import 'package:learn_flutter_simple_weather_app/models/weather.dart';
@@ -14,15 +13,15 @@ class WeatherRepository {
   Future<Weather> fetchWeather(String city) async {
     try {
       final directGeocoding = await weatherApiServices.getDirectGeocoding(city);
-      if (kDebugMode) {
-        print('directGeocoding $directGeocoding');
-      }
+      // if (kDebugMode) {
+      //   print('directGeocoding $directGeocoding');
+      // }
 
       final Weather tempWeather =
           await weatherApiServices.getWeather(directGeocoding);
-      if (kDebugMode) {
-        print('tempWeather: $tempWeather');
-      }
+      // if (kDebugMode) {
+      //   print('tempWeather: $tempWeather');
+      // }
 
       final Weather weather = tempWeather.copyWith(
         name: directGeocoding.name,
