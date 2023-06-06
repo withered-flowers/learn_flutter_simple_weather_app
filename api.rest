@@ -1,0 +1,10 @@
+@baseUrl=http://api.openweathermap.org
+@apiKey=a538905287f73cc14fbd69361e3abcd5
+
+###
+
+GET {{baseUrl}}/geo/1.0/direct?q=London&limit=1&appid={{apiKey}} HTTP/1.1
+
+###
+
+GET http://api.openweathermap.org/geo/1.0/direct?q=London&limit=5&appid={{apiKey}} HTTP/1.1
