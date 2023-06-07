@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
+import 'package:learn_flutter_simple_weather_app/cubits/temp_settings/temp_settings_cubit.dart';
 import 'package:learn_flutter_simple_weather_app/cubits/weather/weather_cubit.dart';
 import 'package:learn_flutter_simple_weather_app/pages/home_page.dart';
 import 'package:learn_flutter_simple_weather_app/repositories/weather_repository.dart';
@@ -35,7 +36,11 @@ class MyApp extends StatelessWidget {
             create: (context) => WeatherCubit(
               weatherRepository: context.read<WeatherRepository>(),
             ),
-          )
+          ),
+          // We will add TempSettingsCubit as the second provider
+          BlocProvider<TempSettingsCubit>(
+            create: (context) => TempSettingsCubit(),
+          ),
         ],
         child: MaterialApp(
           title: 'Weather App',
