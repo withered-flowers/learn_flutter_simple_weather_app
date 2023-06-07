@@ -68,9 +68,61 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: const Center(
-        child: Text('Home'),
-      ),
+      body: _showWeather(),
+    );
+  }
+
+  Widget _showWeather() {
+    // We will use BlocConsumer, to use the WeatherCubit and read its state
+    return BlocConsumer<WeatherCubit, WeatherState>(
+      listener: (context, state) {
+        // Check if status that represent the Fetch status is error?
+        if (state.status == WeatherStatus.error) {
+          // It will show dialog with error message
+          showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                content: Text(state.error.errorMsg),
+              );
+            },
+          );
+        }
+      },
+      builder: ((context, state) {
+        // If initial, then we will make a city to Choose
+        if (state.status == WeatherStatus.initial) {
+          return const Center(
+            child: Text(
+              'Select a city',
+              style: TextStyle(fontSize: 20.0),
+            ),
+          );
+        }
+
+        if (state.status == WeatherStatus.loading) {
+          return const Center(
+            // When loading we will show a CircularProgressIndicator
+            child: CircularProgressIndicator(),
+          );
+        }
+
+        if (state.status == WeatherStatus.error && state.weather.name == '') {
+          return const Center(
+            child: Text(
+              'Select a city',
+              style: TextStyle(fontSize: 20.0),
+            ),
+          );
+        }
+
+        return Center(
+          child: Text(
+            state.weather.name,
+            style: const TextStyle(fontSize: 18.0),
+          ),
+        );
+      }),
     );
   }
 }

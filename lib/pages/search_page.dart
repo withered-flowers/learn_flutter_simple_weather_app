@@ -44,9 +44,11 @@ class _SearchPageState extends State<SearchPage> {
                 style: const TextStyle(fontSize: 18.0),
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
-                  prefixIcon: Icon(Icons.search),
                   labelText: 'City name',
                   hintText: 'Enter city name',
+                  prefixIcon: Icon(
+                    Icons.search,
+                  ),
                 ),
                 validator: (String? input) {
                   if (input == null || input.trim().length < 2) {
